@@ -24,6 +24,7 @@ tbody tr:nth-child(even) td{background:rgba(255,255,255,.015)}tbody tr:hover td{
 table.sortable th{cursor:pointer;user-select:none}table.sortable th:hover{color:var(--text)}
 th[data-asc="1"]::after{content:" ▼"}th[data-asc="0"]::after{content:" ▲"}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:12px 0 22px}
+.cards.six{grid-template-columns:repeat(6,1fr)}.cards.six+.cards.six{margin-top:-10px}@media(max-width:900px){.cards.six{grid-template-columns:repeat(3,1fr)}}@media(max-width:480px){.cards.six{grid-template-columns:repeat(2,1fr)}}
 .card{background:linear-gradient(180deg,var(--s2),var(--s1));border:1px solid var(--line);border-radius:14px;padding:14px 16px;
 transition:transform .15s,border-color .15s}
 .card:hover{transform:translateY(-2px);border-color:#34405a}
