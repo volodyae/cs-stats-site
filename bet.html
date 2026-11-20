@@ -1,51 +1,70 @@
 <!doctype html><html lang="ru"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>67X-Bet</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b0c0e">
+<title>Линия и баланс составов — EVENT CS BREST</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
 <style>
-body{margin:0;background:#0f1115;color:#e6e6e6;font:15px/1.45 system-ui,Segoe UI,Roboto,sans-serif}
-.wrap{max-width:1100px;margin:0 auto;padding:16px}a{color:#7fb4ff}
-h1{margin:6px 0 2px}.sub{color:#9aa3b2;font-size:13px}
-.card{background:#171a21;border:1px solid #262b36;border-radius:10px;padding:14px;margin:14px 0}
-.card h3{margin:0 0 8px;font-size:15px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:6px}
-.pl{display:flex;align-items:center;gap:6px;background:#1d212a;border-radius:8px;padding:5px 8px}
-.pl .n{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pl .r{color:#9aa3b2;font-size:12px}
-.b{border:1px solid #3a4150;background:#232834;color:#ddd;border-radius:6px;padding:4px 10px;cursor:pointer;font-weight:600}
-.b.onA{background:#1f5fd1;border-color:#1f5fd1;color:#fff}.b.onB{background:#c8373b;border-color:#c8373b;color:#fff}
-.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}select{background:#232834;color:#ddd;border:1px solid #3a4150;border-radius:6px;padding:3px}
-.teams{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
-.A{color:#5d9bff}.B{color:#ff6b6e}
-table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:6px}
-td,th{padding:5px 6px;border-bottom:1px solid #232834;text-align:left}th{color:#9aa3b2;font-weight:500}
-td.k{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
-td.p{text-align:right;color:#9aa3b2;font-variant-numeric:tabular-nums;width:60px}
-.mk{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:0 14px}
-.big{display:flex;gap:10px}.big div{flex:1;text-align:center;background:#1d212a;border-radius:8px;padding:10px}
-.big b{display:block;font-size:28px}
-</style></head><body><div class="wrap">
-<a href="index.html">← на главную</a>
-<h1>🎰 67X-Bet</h1>
-<div class="sub">Честные коэффициенты без маржи. Только для фана: ставим на гордость, а не на деньги. Данные на <span id="built"></span>.</div>
-<div class="card">
- <div class="tools">
-  <button class="b" id="bDef">Составы бота</button><button class="b" id="bSwap">A ⇄ B</button>
-  <button class="b" id="bClr">Очистить</button>
-  <label class="sub">Карт за вечер: <select id="nMaps"></select></label>
-  <button class="b" id="bLink">Скопировать ссылку</button><span id="msg" class="sub"></span>
- </div>
- <div class="teams">
-  <div><b class="A">🔵 Команда A</b> <span id="cA"></span><div id="lA" class="sub"></div></div>
-  <div><b class="B">🔴 Команда B</b> <span id="cB"></span><div id="lB" class="sub"></div></div>
- </div>
-</div>
-<div class="card"><div class="grid" id="pool"></div></div>
-<div id="out"></div>
-<div class="card sub">Как считается. Сила команд — та же, что у бота при делении (рейтинг для составов, поправка за лишнего игрока).
-Из неё получается шанс выиграть раунд, дальше точная математика MR12 с овертаймами MR3: все счета, форы и тоталы.
-Модель считает раунды одинаковыми, а в жизни бывают серии из-за экономики, поэтому реальные шансы разгромов
-и крупных фор чуть выше, чем здесь. MVP — шанс показать лучшую личную игру вечера с учётом того, насколько
-вечер обычно отличается от рейтинга игрока (±<span id="sig"></span>).</div>
-</div><script>
-const D={"players": [{"id": 57, "n": "amirovart", "s": -0.09030000120401382, "r": 0.7576, "pf": 0.8559, "rd": 619}, {"id": 47, "n": "asdUF", "s": 0.2475000023841858, "r": 1.6002, "pf": 1.768, "rd": 136}, {"id": 6, "n": "Ded Pool", "s": 0.03799999877810478, "r": 1.0776, "pf": 0.9156, "rd": 1736}, {"id": 23, "n": "dim0ak", "s": 0.15710000693798065, "r": 1.3745, "pf": 1.4138, "rd": 752}, {"id": 44, "n": "fankyo", "s": 0.07609999924898148, "r": 1.1727, "pf": 1.2079, "rd": 50}, {"id": 12, "n": "Fravanat", "s": -0.03220000118017197, "r": 0.9026, "pf": 0.9576, "rd": 625}, {"id": 52, "n": "GHOST", "s": -0.12919999659061432, "r": 0.6606, "pf": 0.7574, "rd": 266}, {"id": 40, "n": "Igor_44", "s": 0.036400001496076584, "r": 1.0735, "pf": 0.9165, "rd": 692}, {"id": 3, "n": "karab13v", "s": 0.030799999833106995, "r": 1.0596, "pf": 1.034, "rd": 1721}, {"id": 28, "n": "Knifeofmeat", "s": 0.05790000036358833, "r": 1.1271, "pf": 1.4186, "rd": 326}, {"id": 7, "n": "kolosei", "s": -0.050999999046325684, "r": 0.8556, "pf": 1.0641, "rd": 1126}, {"id": 11, "n": "KoMAR1k", "s": -0.013100000098347664, "r": 0.9503, "pf": 0.8898, "rd": 1765}, {"id": 53, "n": "Koriko", "s": null, "r": null, "pf": null, "rd": 0}, {"id": 48, "n": "Kozak", "s": -0.13539999723434448, "r": 0.6452, "pf": 0.7227, "rd": 214}, {"id": 13, "n": "KYKY_EPTA", "s": 0.03999999910593033, "r": 1.0826, "pf": 0.904, "rd": 414}, {"id": 30, "n": "mazkovadim", "s": -0.19850000739097595, "r": 0.4879, "pf": 0.6625, "rd": 478}, {"id": 21, "n": "miron don", "s": 0.011500000022351742, "r": 1.0115, "pf": 1.3944, "rd": 731}, {"id": 16, "n": "OPER", "s": -0.06790000200271606, "r": 0.8135, "pf": 0.7833, "rd": 1327}, {"id": 18, "n": "painkiller", "s": 0.11020000278949738, "r": 1.2576, "pf": 0.7868, "rd": 1723}, {"id": 27, "n": "SAINT5000", "s": 0.19840000569820404, "r": 1.4777, "pf": 1.5855, "rd": 1024}, {"id": 45, "n": "SiniyTraktobr", "s": 0.019899999722838402, "r": 1.0324, "pf": 0.8702, "rd": 389}, {"id": 1, "n": "st1nker", "s": 0.14249999821186066, "r": 1.3382, "pf": 1.2697, "rd": 303}, {"id": 5, "n": "Tomirlan", "s": -0.1574999988079071, "r": 0.59, "pf": 0.8615, "rd": 1480}, {"id": 55, "n": "V Kolosei", "s": -0.02630000002682209, "r": 0.9173, "pf": 0.9839, "rd": 164}, {"id": 29, "n": "vinik", "s": 0.19189999997615814, "r": 1.4614, "pf": 1.63, "rd": 154}, {"id": 58, "n": "Бархатные тяги", "s": -0.14949999749660492, "r": 0.61, "pf": 0.5746, "rd": 315}], "def": {"day": "10.11", "A": [27, 3, 7, 18, 5], "B": [23, 21, 11, 6, 16]}, "md": 0.35, "k": 0.7, "calib": 200, "sig": 0.23136802699240064, "built": "20.11.2026 01:50"};
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+.btn{background:var(--s2);border:1px solid var(--line);color:var(--text);border-radius:5px;padding:6px 12px;font:600 12.5px Inter,sans-serif;cursor:pointer;transition:border-color .12s}
+.btn:hover{border-color:var(--acc)}
+select.btn{padding:5px 10px}
+.lineup-bar{display:grid;grid-template-columns:1fr 1fr;gap:12px;background:var(--s1);border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin-bottom:14px}
+@media(max-width:700px){.lineup-bar{grid-template-columns:1fr}}
+.tm-title{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.tmA{color:#5da2ff}.tmB{color:#ee6b78}
+.tm-list{font-size:13px;color:var(--text);min-height:20px}
+.pool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:6px;background:var(--s1);border:1px solid var(--line);border-radius:6px;padding:12px}
+.p-item{display:flex;align-items:center;gap:6px;background:var(--s2);border:1px solid var(--line);border-radius:4px;padding:5px 8px}
+.p-item .n{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500;font-size:13px}
+.p-item .r{color:var(--mute);font-size:11.5px}
+.ab{border:1px solid var(--line-hi);background:var(--s1);color:var(--sub);border-radius:3px;padding:2px 8px;cursor:pointer;font:700 11px "JetBrains Mono",monospace}
+.ab.onA{background:#245bb8;border-color:#3a78e0;color:#fff}
+.ab.onB{background:#b53340;border-color:#de4d5b;color:#fff}
+.matchup{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;background:var(--s1);border:1px solid var(--line);border-top:2px solid var(--acc);border-radius:6px;padding:20px 24px;margin:18px 0}
+@media(max-width:640px){.matchup{grid-template-columns:1fr;text-align:center}}
+.mu-side.right{text-align:right}@media(max-width:640px){.mu-side.right{text-align:center}}
+.mu-odd{font-size:34px;font-weight:700;line-height:1.05;display:block;margin:4px 0}
+.mu-vs{font-size:11px;color:var(--mute);letter-spacing:.08em;text-transform:uppercase;text-align:center}
+.mk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:960px){.mk-grid{grid-template-columns:1fr}}
+.mk-card{background:var(--s1);border:1px solid var(--line);border-radius:6px;padding:14px}
+.mk-card h3{margin:0 0 10px;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--sub)}
+.mk-tbl td,.mk-tbl th{padding:6px 6px;font-size:12.5px}
+</style></head><body>
+<header class="topbar"><div class="topbar-in">
+  <a class="brand" href="index.html"><span class="brand-mark"></span>EVENT CS BREST</a>
+  <nav>
+    <a href="index.html">Рейтинг</a><a href="sessions.html">Матчи</a>
+    <a href="maps.html">Карты</a><a href="pairs.html">Связки</a><a href="bet.html" class="on">Линия</a>
+  </nav>
+</div></header>
+<main>
+  <div class="page-head">
+    <h1>Калькулятор составов и честная линия (67X-Bet)</h1>
+    <p class="sub">Расчёт баланса команд и вероятностей MR12 без букмекерской маржи · обновлено <span id="built" class="mono"></span></p>
+  </div>
+
+  <div class="toolbar">
+    <button class="btn" id="bDef">Составы бота</button>
+    <button class="btn" id="bSwap">Поменять A ⇄ B</button>
+    <button class="btn" id="bClr">Сбросить</button>
+    <label class="sub" style="margin:0 0 0 6px">Карт в серии: <select class="btn mono" id="nMaps"></select></label>
+    <button class="btn" id="bLink">Скопировать ссылку на расклад</button>
+    <span id="msg" class="sub" style="color:var(--acc);margin:0"></span>
+  </div>
+
+  <div class="lineup-bar">
+    <div><div class="tm-title tmA">Команда A <span id="cA" class="mono"></span></div><div id="lA" class="tm-list"></div></div>
+    <div><div class="tm-title tmB">Команда B <span id="cB" class="mono"></span></div><div id="lB" class="tm-list"></div></div>
+  </div>
+
+  <div class="pool-grid" id="pool"></div>
+  <div id="out"></div>
+</main>
+<footer><div class="foot-in"><span>EVENT CS BREST · Модель MR12 + OT MR3 (разброс формы ±<span id="sig" class="mono"></span>)</span><span class="mono">Честные коэффициенты 1/P</span></div></footer>
+<script>
+const D={"players": [{"id": 57, "n": "amirovart", "s": -0.09030000120401382, "r": 0.7576, "pf": 0.8559, "rd": 619}, {"id": 47, "n": "asdUF", "s": 0.2475000023841858, "r": 1.6002, "pf": 1.768, "rd": 136}, {"id": 6, "n": "Ded Pool", "s": 0.03799999877810478, "r": 1.0776, "pf": 0.9156, "rd": 1736}, {"id": 23, "n": "dim0ak", "s": 0.15710000693798065, "r": 1.3745, "pf": 1.4138, "rd": 752}, {"id": 44, "n": "fankyo", "s": 0.07609999924898148, "r": 1.1727, "pf": 1.2079, "rd": 50}, {"id": 12, "n": "Fravanat", "s": -0.03220000118017197, "r": 0.9026, "pf": 0.9576, "rd": 625}, {"id": 52, "n": "GHOST", "s": -0.12919999659061432, "r": 0.6606, "pf": 0.7574, "rd": 266}, {"id": 40, "n": "Igor_44", "s": 0.036400001496076584, "r": 1.0735, "pf": 0.9165, "rd": 692}, {"id": 3, "n": "karab13v", "s": 0.030799999833106995, "r": 1.0596, "pf": 1.034, "rd": 1721}, {"id": 28, "n": "Knifeofmeat", "s": 0.05790000036358833, "r": 1.1271, "pf": 1.4186, "rd": 326}, {"id": 7, "n": "kolosei", "s": -0.050999999046325684, "r": 0.8556, "pf": 1.0641, "rd": 1126}, {"id": 11, "n": "KoMAR1k", "s": -0.013100000098347664, "r": 0.9503, "pf": 0.8898, "rd": 1765}, {"id": 53, "n": "Koriko", "s": null, "r": null, "pf": null, "rd": 0}, {"id": 48, "n": "Kozak", "s": -0.13539999723434448, "r": 0.6452, "pf": 0.7227, "rd": 214}, {"id": 13, "n": "KYKY_EPTA", "s": 0.03999999910593033, "r": 1.0826, "pf": 0.904, "rd": 414}, {"id": 30, "n": "mazkovadim", "s": -0.19850000739097595, "r": 0.4879, "pf": 0.6625, "rd": 478}, {"id": 21, "n": "miron don", "s": 0.011500000022351742, "r": 1.0115, "pf": 1.3944, "rd": 731}, {"id": 16, "n": "OPER", "s": -0.06790000200271606, "r": 0.8135, "pf": 0.7833, "rd": 1327}, {"id": 18, "n": "painkiller", "s": 0.11020000278949738, "r": 1.2576, "pf": 0.7868, "rd": 1723}, {"id": 27, "n": "SAINT5000", "s": 0.19840000569820404, "r": 1.4777, "pf": 1.5855, "rd": 1024}, {"id": 45, "n": "SiniyTraktobr", "s": 0.019899999722838402, "r": 1.0324, "pf": 0.8702, "rd": 389}, {"id": 1, "n": "st1nker", "s": 0.14249999821186066, "r": 1.3382, "pf": 1.2697, "rd": 303}, {"id": 5, "n": "Tomirlan", "s": -0.1574999988079071, "r": 0.59, "pf": 0.8615, "rd": 1480}, {"id": 55, "n": "V Kolosei", "s": -0.02630000002682209, "r": 0.9173, "pf": 0.9839, "rd": 164}, {"id": 29, "n": "vinik", "s": 0.19189999997615814, "r": 1.4614, "pf": 1.63, "rd": 154}, {"id": 58, "n": "Бархатные тяги", "s": -0.14949999749660492, "r": 0.61, "pf": 0.5746, "rd": 315}], "def": {"day": "10.11", "A": [27, 3, 7, 18, 5], "B": [23, 21, 11, 6, 16]}, "md": 0.35, "k": 0.7, "calib": 200, "sig": 0.23136802699240064, "built": "20.11.2026 13:36"};
 const P={};D.players.forEach(x=>{x.s=x.s??0;x.pf=x.pf??1;P[x.id]=x;});
 let T={};
 const $=id=>document.getElementById(id);
@@ -53,18 +72,23 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 function comb(n,k){let r=1;for(let i=1;i<=k;i++)r=r*(n-k+i)/i;return r;}
 function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
 const team=t=>Object.keys(T).filter(id=>T[id]===t).map(Number);
-const coef=pr=>{const k=1/pr;return k>=1000?'1000+':k>=100?String(Math.round(k)):k.toFixed(2);};
+const coef=pr=>{const k=1/pr;return k>=999?'999+':k>=100?String(Math.round(k)):k.toFixed(2);};
 const pct=pr=>pr>=0.995?'>99%':pr<0.01?(pr*100).toFixed(1)+'%':Math.round(pr*100)+'%';
-const row=(l,pr)=>pr<0.0005?'':`<tr><td>${l}</td><td class="p">${pct(pr)}</td><td class="k">${coef(pr)}</td></tr>`;
-const card=(title,body)=>`<div class="card"><h3>${title}</h3>${body}</div>`;
-const tbl=rows=>`<table>${rows.join('')}</table>`;
+const row=(l,pr)=>pr<0.002?'':`<tr><td class="l">${l}</td><td class="r mono muted">${pct(pr)}</td><td class="r mono"><b>${coef(pr)}</b></td></tr>`;
+const mcard=(title,body)=>`<div class="mk-card"><h3>${title}</h3>${body}</div>`;
+const tbl=rows=>`<table class="mk-tbl">${rows.join('')}</table>`;
+
 function pair(title,l1,l2,lines){
-  const r=lines.filter(([,x])=>x>=0.01&&x<=0.99)
-    .map(([ln,x])=>`<tr><td>${ln}</td><td class="k">${coef(x)}</td><td class="k">${coef(1-x)}</td></tr>`);
-  return r.length?card(title,`<table><tr><th></th><th style="text-align:right">${l1}</th><th style="text-align:right">${l2}</th></tr>${r.join('')}</table>`):'';
+  const r=lines.filter(([,x])=>x>=0.03&&x<=0.97)
+    .map(([ln,x])=>`<tr><td class="l mono">${ln}</td><td class="r mono"><b>${coef(x)}</b></td><td class="r mono"><b>${coef(1-x)}</b></td></tr>`);
+  return r.length?mcard(title,`<table class="mk-tbl"><tr><th class="l">Линия</th><th class="r">${l1}</th><th class="r">${l2}</th></tr>${r.join('')}</table>`):'';
 }
+
 function calc(A,B,n){
-  if(!A.length||!B.length){$('out').innerHTML='<div class="card sub">Раскидайте игроков по командам кнопками A и B рядом с никами.</div>';return;}
+  if(!A.length||!B.length){
+    $('out').innerHTML='<p class="sub" style="margin-top:16px">Отметьте игроков буквами A и B выше, чтобы рассчитать баланс и коэффициенты.</p>';
+    return;
+  }
   const sum=ids=>ids.reduce((a,id)=>a+P[id].s,0);
   const z=(sum(A)-sum(B)+D.md*(A.length-B.length))*D.k;
   const p=1/(1+Math.exp(-z)),q=1-p,S=[];
@@ -72,57 +96,82 @@ function calc(A,B,n){
   const pOT=comb(24,12)*p**12*q**12;let tie=pOT,base=12,ot=1;
   while(tie>1e-12&&ot<=40){
     for(let k=0;k<=2;k++){const c=comb(3+k,k);S.push({a:base+4,b:base+k,pr:tie*c*p**4*q**k,ot},{a:base+k,b:base+4,pr:tie*c*q**4*p**k,ot});}
-    tie*=20*p**3*q**3;base+=3;ot++;}
+    tie*=20*p**3*q**3;base+=3;ot++;
+  }
   const Pr=f=>S.reduce((a,x)=>a+(f(x)?x.pr:0),0);
   const pm=Pr(x=>x.a>x.b);
   const avgR=ids=>{const v=ids.map(id=>P[id].r).filter(x=>x!=null);return v.length?(v.reduce((a,b)=>a+b,0)/v.length).toFixed(2):'—';};
-  let h=`<div class="card"><h3>Победитель карты</h3><div class="big">
-   <div><span class="A">Команда A</span><b>${coef(pm)}</b><span class="sub">${pct(pm)} · рейтинг ${avgR(A)}</span></div>
-   <div><span class="B">Команда B</span><b>${coef(1-pm)}</b><span class="sub">${pct(1-pm)} · рейтинг ${avgR(B)}</span></div></div>
-   <div class="sub" style="margin-top:8px">Шанс выиграть раунд: A ${(p*100).toFixed(1)}% · B ${(q*100).toFixed(1)}%${A.length!==B.length?' · неравные составы учтены':''}</div></div>`;
-  const mk=[];
-  const exact=w=>{const r=[],me=s=>w==='A'?s.a:s.b,op=s=>w==='A'?s.b:s.a,lab=(x,y)=>w==='A'?`${x}:${y}`:`${y}:${x}`;
-    for(let k=0;k<=11;k++)r.push(row(lab(13,k),S.find(s=>s.ot===0&&me(s)===13&&op(s)===k).pr));
-    for(let k=0;k<=2;k++)r.push(row(lab(16,12+k)+' (ОТ)',S.find(s=>s.ot===1&&me(s)===16&&op(s)===12+k).pr));
-    r.push(row('2-й овертайм и дальше',Pr(s=>s.ot>=2&&me(s)>op(s))));return tbl(r);};
-  mk.push(card('Точный счёт: победа <span class="A">A</span>',exact('A')));
-  mk.push(card('Точный счёт: победа <span class="B">B</span>',exact('B')));
-  mk.push(card('Овертайм',tbl([row('Будет (12:12)',pOT),row('Не будет',1-pOT),row('Два овертайма и больше',Pr(s=>s.ot>=2))])));
-  const H=[];
-  for(let x=2.5;x<=12.5;x++)H.push([`A −${x} / B +${x}`,Pr(s=>s.a-s.b>x)]);
-  for(let x=2.5;x<=12.5;x++)H.push([`A +${x} / B −${x}`,Pr(s=>s.a-s.b>-x)]);
-  mk.push(pair('Фора по раундам','A','B',H));
-  const TT=[];for(let t=14.5;t<=30.5;t++)TT.push([`${t}`,Pr(s=>s.a+s.b>t)]);
-  mk.push(pair('Тотал раундов на карте','Больше','Меньше',TT));
-  const IA=[],IB=[];for(let t=2.5;t<=12.5;t++){IA.push([`${t}`,Pr(s=>s.a>t)]);IB.push([`${t}`,Pr(s=>s.b>t)]);}
-  mk.push(pair('Раунды команды <span class="A">A</span>','Больше','Меньше',IA));
-  mk.push(pair('Раунды команды <span class="B">B</span>','Больше','Меньше',IB));
-  mk.push(card('Пистолетные раунды (1-й и 13-й)',tbl([row('A берёт первый пистолет',p),row('B берёт первый пистолет',q),
-    row('A берёт оба',p*p),row('По одному',2*p*q),row('B берёт оба',q*q)])));
-  if(n>1){const r=[];let wA=0,dr=0,wB=0;
-    for(let a=n;a>=0;a--){const pr=comb(n,a)*pm**a*(1-pm)**(n-a);r.push(row(`${a}:${n-a} по картам`,pr));
-      if(a>n-a)wA+=pr;else if(a===n-a)dr+=pr;else wB+=pr;}
-    const ev=[row('Вечер за A',wA)];if(n%2===0)ev.push(row('Ничья по картам',dr));
-    ev.push(row('Вечер за B',wB),row(`Хотя бы один овертайм за ${n} карт`,1-(1-pOT)**n));
-    mk.push(card(`Весь вечер: ${n} карт`,tbl(ev)+tbl(r)));}
+
+  let h=`<div class="matchup">
+    <div class="mu-side"><span class="tm-title tmA">КОМАНДА A</span><b class="mu-odd mono">${coef(pm)}</b><span class="sub mono">${pct(pm)} победа · сила ${avgR(A)}</span></div>
+    <div class="mu-vs">НА ОТДЕЛЬНОЙ КАРТЕ<div class="mono" style="margin-top:4px;color:var(--sub)">раунд ${(p*100).toFixed(1)}% / ${(q*100).toFixed(1)}%</div></div>
+    <div class="mu-side right"><span class="tm-title tmB">КОМАНДА B</span><b class="mu-odd mono">${coef(1-pm)}</b><span class="sub mono">${pct(1-pm)} победа · сила ${avgR(B)}</span></div>
+  </div>`;
+
+  const topCards=[];
+  if(n>1){
+    const r=[];let wA=0,dr=0,wB=0;
+    for(let a=n;a>=0;a--){
+      const pr=comb(n,a)*pm**a*(1-pm)**(n-a);
+      r.push(row(`Счёт ${a}:${n-a}`,pr));
+      if(a>n-a)wA+=pr;else if(a===n-a)dr+=pr;else wB+=pr;
+    }
+    const ev=[row('Победа A в серии',wA)];
+    if(n%2===0)ev.push(row('Ничья по картам',dr));
+    ev.push(row('Победа B в серии',wB));
+    topCards.push(mcard(`Итог вечера (${n} карт)`,tbl(ev.concat(r))));
+  }
+
+  const otRows=[
+    row('Овертайм 12:12 на карте — Да',pOT),
+    row('Овертайм на карте — Нет',1-pOT),
+  ];
+  if(n>1)otRows.push(row(`Хотя бы 1 ОТ за ${n} карт`,1-(1-pOT)**n));
+  otRows.push(row('Пистолеты: A берёт оба',p*p),row('Пистолеты: размен 1:1',2*p*q),row('Пистолеты: B берёт оба',q*q));
+  topCards.push(mcard('Специальные рынки',tbl(otRows)));
+
   const ids=[...A,...B],N=20000,cnt={},R=rng(67);ids.forEach(i=>cnt[i]=0);
-  for(let t=0;t<N;t++){let best=-1e9,bi=ids[0];
+  for(let t=0;t<N;t++){
+    let best=-1e9,bi=ids[0];
     for(const i of ids){const g=Math.sqrt(-2*Math.log(1-R()))*Math.cos(2*Math.PI*R()),x=P[i].pf+D.sig*g;if(x>best){best=x;bi=i;}}
-    cnt[bi]++;}
-  mk.push(card('MVP вечера (лучшая личная игра)',tbl(ids.sort((x,y)=>cnt[y]-cnt[x])
-    .map(i=>row(`<span class="${T[i]}">●</span> ${esc(P[i].n)}`,cnt[i]/N)))));
-  $('out').innerHTML=h+'<div class="mk">'+mk.join('')+'</div>';
+    cnt[bi]++;
+  }
+  topCards.push(mcard('Фавориты на MVP вечера',tbl(ids.sort((x,y)=>cnt[y]-cnt[x]).slice(0,8)
+    .map(i=>row(`<span class="${T[i]==='A'?'tmA':'tmB'}">●</span> ${esc(P[i].n)}`,cnt[i]/N)))));
+
+  // Расширенная роспись убрана под спойлер
+  const exact=w=>{
+    const r=[],me=s=>w==='A'?s.a:s.b,op=s=>w==='A'?s.b:s.a,lab=(x,y)=>w==='A'?`${x}:${y}`:`${y}:${x}`;
+    for(let k=5;k<=11;k++)r.push(row(lab(13,k),S.find(s=>s.ot===0&&me(s)===13&&op(s)===k).pr));
+    r.push(row('Победа в овертайме',Pr(s=>s.ot>=1&&me(s)>op(s))));
+    return tbl(r);
+  };
+  const H=[2.5,3.5,4.5,5.5].map(x=>[`A −${x} / B +${x}`,Pr(s=>s.a-s.b>x)])
+    .concat([2.5,3.5,4.5,5.5].map(x=>[`A +${x} / B −${x}`,Pr(s=>s.a-s.b>-x)]));
+  const TT=[19.5,20.5,21.5,22.5].map(t=>[`Тотал ${t}`,Pr(s=>s.a+s.b>t)]);
+
+  const extra=`<details class="fold"><summary>Развернуть детальную роспись (форы, тоталы раундов и точный счёт карты)</summary>
+    <div class="mk-grid">
+      ${pair('Фора по раундам','Ф1','Ф2',H)}
+      ${pair('Тотал раундов на карте','ТБ','ТМ',TT)}
+      ${mcard('Ходовые точные счета (A)',exact('A'))}
+    </div></details>`;
+
+  $('out').innerHTML=h+`<div class="mk-grid">${topCards.join('')}</div>`+extra;
 }
+
 function renderPool(){
-  $('pool').innerHTML=D.players.map(x=>`<div class="pl"><span class="n" title="${esc(x.n)}">${esc(x.n)}</span>
-   <span class="r">${x.r==null?'нов.':x.r.toFixed(2)}</span>
-   <button class="b ${T[x.id]==='A'?'onA':''}" data-id="${x.id}" data-t="A">A</button>
-   <button class="b ${T[x.id]==='B'?'onB':''}" data-id="${x.id}" data-t="B">B</button></div>`).join('');
+  $('pool').innerHTML=D.players.map(x=>`<div class="p-item"><span class="n" title="${esc(x.n)}">${esc(x.n)}</span>
+   <span class="r mono">${x.r==null?'—':x.r.toFixed(2)}</span>
+   <button class="ab ${T[x.id]==='A'?'onA':''}" data-id="${x.id}" data-t="A">A</button>
+   <button class="ab ${T[x.id]==='B'?'onB':''}" data-id="${x.id}" data-t="B">B</button></div>`).join('');
 }
 function loadDef(){T={};(D.def.A||[]).forEach(id=>{if(P[id])T[id]='A';});(D.def.B||[]).forEach(id=>{if(P[id])T[id]='B';});}
-function fromHash(){const h=new URLSearchParams(location.hash.slice(1));if(!h.has('A')&&!h.has('B'))return false;T={};
+function fromHash(){
+  const h=new URLSearchParams(location.hash.slice(1));if(!h.has('A')&&!h.has('B'))return false;T={};
   ['A','B'].forEach(t=>(h.get(t)||'').split(',').filter(Boolean).forEach(id=>{if(P[id])T[id]=t;}));
-  const n=+h.get('n');if(n>=1&&n<=5)$('nMaps').value=n;return true;}
+  const n=+h.get('n');if(n>=1&&n<=5)$('nMaps').value=n;return true;
+}
 function update(){
   renderPool();const A=team('A'),B=team('B'),lst=ids=>ids.map(id=>esc(P[id].n)).join(', ')||'—';
   $('cA').textContent=`(${A.length})`;$('cB').textContent=`(${B.length})`;$('lA').innerHTML=lst(A);$('lB').innerHTML=lst(B);
@@ -137,7 +186,7 @@ $('bDef').onclick=()=>{loadDef();update();};
 $('bSwap').onclick=()=>{for(const id in T)T[id]=T[id]==='A'?'B':'A';update();};
 $('bClr').onclick=()=>{T={};update();};
 $('nMaps').onchange=update;
-$('bLink').onclick=()=>navigator.clipboard.writeText(location.href).then(()=>{$('msg').textContent='Ссылка скопирована';setTimeout(()=>$('msg').textContent='',2000);});
-if(D.def.A)$('bDef').textContent='Составы бота '+D.def.day;else $('bDef').style.display='none';
+$('bLink').onclick=()=>navigator.clipboard.writeText(location.href).then(()=>{$('msg').textContent='Скопировано';setTimeout(()=>$('msg').textContent='',2000);});
+if(D.def.A)$('bDef').textContent='Составы бота ('+D.def.day+')';else $('bDef').style.display='none';
 if(!fromHash())loadDef();update();
 </script></body></html>
