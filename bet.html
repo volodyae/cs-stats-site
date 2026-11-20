@@ -1,19 +1,30 @@
 <!doctype html><html lang="ru"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#090a0d">
-<title>Линия и конструктор составов — EVENT CS BREST</title>
+<title>Линия и конструктор карт — EVENT CS BREST</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=1795172047">
+<link rel="stylesheet" href="style.css?v=1795173996">
 <style>
 .toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
 .btn{background:var(--s1);border:1px solid var(--line);color:var(--text);border-radius:7px;padding:6px 13px;font:600 12.5px Inter,sans-serif;cursor:pointer;transition:all .14s}
 .btn:hover{border-color:var(--acc);color:var(--acc)}
 select.btn{padding:5px 10px}
-.lineup-bar{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:15px 18px;margin-bottom:14px}
+.lineup-bar{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:15px 18px;margin-bottom:12px}
 @media(max-width:700px){.lineup-bar{grid-template-columns:1fr}}
 .tm-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
 .tmA{color:#60a5fa}.tmB{color:#fb7185}
 .tm-list{font-size:13.5px;font-weight:500;color:var(--text);min-height:20px}
+
+/* Выбор пула карт вечера */
+.veto-box{padding:14px 18px;margin-bottom:12px}
+.veto-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.veto-chips{display:flex;flex-wrap:wrap;gap:7px}
+.m-pick{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--sub);border-radius:7px;padding:6px 11px;font:600 12.5px Inter,sans-serif;cursor:pointer;transition:all .14s}
+.m-pick:hover{border-color:var(--line-hi);color:var(--text)}
+.m-pick.sel{background:var(--acc-dim);border-color:var(--acc);color:var(--text)}
+.m-pick .ord{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:4px;background:var(--acc);color:#090a0d;font:800 11px "JetBrains Mono",monospace}
+.m-pick .mpct{font-size:11px;color:var(--mute)}
+
 .pool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:7px;padding:14px}
 .p-item{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:6px;padding:6px 9px;transition:border-color .12s}
 .p-item:hover{border-color:var(--line-hi)}
@@ -22,18 +33,29 @@ select.btn{padding:5px 10px}
 .ab{border:1px solid var(--line-hi);background:var(--s1);color:var(--sub);border-radius:4px;padding:2px 8px;cursor:pointer;font:700 11px "JetBrains Mono",monospace;transition:all .12s}
 .ab.onA{background:#2563eb;border-color:#3b82f6;color:#fff}
 .ab.onB{background:#e11d48;border-color:#f43f5e;color:#fff}
-.matchup{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;padding:22px 26px;margin:18px 0;border-color:rgba(240,180,41,.35)}
+
+.matchup{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;padding:20px 26px;margin:18px 0 12px;border-color:rgba(240,180,41,.35)}
 @media(max-width:640px){.matchup{grid-template-columns:1fr;text-align:center}}
 .mu-side.right{text-align:right}@media(max-width:640px){.mu-side.right{text-align:center}}
-.mu-odd{font-size:36px;font-weight:700;line-height:1.05;display:block;margin:4px 0}
-.mu-bar{height:6px;background:rgba(244,63,94,.45);border-radius:3px;overflow:hidden;width:180px;margin:8px auto 0}
+.mu-odd{font-size:34px;font-weight:700;line-height:1.05;display:block;margin:4px 0}
+.mu-bar{height:6px;background:rgba(244,63,94,.45);border-radius:3px;overflow:hidden;width:190px;margin:8px auto 0}
 .mu-bar i{display:block;height:100%;background:#3b82f6}
+
+.map-odds-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:14px}
+.mo-card{padding:13px 15px}
+.mo-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.mo-num{font-size:10px;font-weight:700;color:var(--acc);letter-spacing:.08em}
+.mo-name{font-size:14.5px;font-weight:700}
+.mo-duel{display:flex;justify-content:space-between;align-items:baseline;margin-top:6px}
+.mo-side b{font-size:20px;display:block}
+.mo-side small{font-size:11px;color:var(--mute)}
+
 .mk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:960px){.mk-grid{grid-template-columns:1fr}}
 .mk-card{padding:15px 16px}
 .mk-card h3{margin:0 0 10px;font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--sub)}
 .mk-tbl td,.mk-tbl th{padding:6.5px 6px;font-size:12.5px}
-details.fold{margin:18px 0;padding:12px 16px}
+details.fold{margin:16px 0;padding:12px 16px}
 details.fold summary{cursor:pointer;font-weight:600;font-size:12.5px;color:var(--sub);user-select:none}
 details.fold summary:hover{color:var(--acc)}
 details.fold[open] summary{margin-bottom:14px;color:var(--acc)}
@@ -49,9 +71,9 @@ details.fold[open] summary{margin-bottom:14px;color:var(--acc)}
 </div></header>
 <main>
   <div class="page-head">
-    <div class="eyebrow mono">LINEUP SIMULATOR & FAIR ODDS</div>
-    <h1>Конструктор составов и линия</h1>
-    <p class="sub">Точная вероятностная модель MR12 без букмекерской маржи · обновлено <span id="built" class="mono"></span></p>
+    <div class="eyebrow mono">MAP-AWARE LINEUP & ODDS ENGINE</div>
+    <h1>Конструктор составов и карт вечера</h1>
+    <p class="sub">По-карточная модель силы составов MR12 + точная свёртка серии Пуассона–Бинома · обновлено <span id="built" class="mono"></span></p>
   </div>
 
   <div class="toolbar">
@@ -59,6 +81,7 @@ details.fold[open] summary{margin-bottom:14px;color:var(--acc)}
     <button class="btn" id="bSwap">Поменять A ⇄ B</button>
     <button class="btn" id="bClr">Сбросить</button>
     <label class="sub" style="margin:0 0 0 6px">Карт в серии: <select class="btn mono" id="nMaps"></select></label>
+    <button class="btn" id="bClrMaps">Очистить карты</button>
     <button class="btn" id="bLink">Скопировать ссылку</button>
     <span id="msg" class="sub" style="color:var(--acc);margin:0"></span>
   </div>
@@ -68,24 +91,79 @@ details.fold[open] summary{margin-bottom:14px;color:var(--acc)}
     <div><div class="tm-title tmB">Команда B <span id="cB" class="mono"></span></div><div id="lB" class="tm-list"></div></div>
   </div>
 
-  <div class="pool-grid bento" id="pool"></div>
+  <div class="veto-box bento">
+    <div class="veto-head">
+      <div><b style="font-size:13px">Пул карт на вечер (по порядку 1 → N)</b>
+      <span class="sec-sub">Нажимайте на карты, которые выбрали играть: линия пересчитает каждую карту и итог серии с учётом статистики игроков на них!</span></div>
+    </div>
+    <div class="veto-chips" id="mapChips"></div>
+  </div>
+
+  <details class="fold bento" id="poolFold" open>
+    <summary>Игроки клуба — выбор составов A и B</summary>
+    <div class="pool-grid" id="pool" style="padding:4px 0 0"></div>
+  </details>
+
   <div id="out"></div>
 </main>
-<footer><div class="foot-in"><span>EVENT CS BREST · Модель MR12 + OT MR3 (разброс ±<span id="sig" class="mono"></span>)</span><span class="mono">Fair 1/P Odds</span></div></footer>
+<footer><div class="foot-in"><span>EVENT CS BREST · По-карточная модель MR12 + OT MR3 (разброс ±<span id="sig" class="mono"></span>)</span><span class="mono">Fair 1/P Odds</span></div></footer>
 <script>
-const D={"players": [{"id": 57, "n": "amirovart", "s": -0.09030000120401382, "r": 0.7576, "pf": 0.8559, "rd": 619}, {"id": 47, "n": "asdUF", "s": 0.2475000023841858, "r": 1.6002, "pf": 1.768, "rd": 136}, {"id": 6, "n": "Ded Pool", "s": 0.03799999877810478, "r": 1.0776, "pf": 0.9156, "rd": 1736}, {"id": 23, "n": "dim0ak", "s": 0.15710000693798065, "r": 1.3745, "pf": 1.4138, "rd": 752}, {"id": 44, "n": "fankyo", "s": 0.07609999924898148, "r": 1.1727, "pf": 1.2079, "rd": 50}, {"id": 12, "n": "Fravanat", "s": -0.03220000118017197, "r": 0.9026, "pf": 0.9576, "rd": 625}, {"id": 52, "n": "GHOST", "s": -0.12919999659061432, "r": 0.6606, "pf": 0.7574, "rd": 266}, {"id": 40, "n": "Igor_44", "s": 0.036400001496076584, "r": 1.0735, "pf": 0.9165, "rd": 692}, {"id": 3, "n": "karab13v", "s": 0.030799999833106995, "r": 1.0596, "pf": 1.034, "rd": 1721}, {"id": 28, "n": "Knifeofmeat", "s": 0.05790000036358833, "r": 1.1271, "pf": 1.4186, "rd": 326}, {"id": 7, "n": "kolosei", "s": -0.050999999046325684, "r": 0.8556, "pf": 1.0641, "rd": 1126}, {"id": 11, "n": "KoMAR1k", "s": -0.013100000098347664, "r": 0.9503, "pf": 0.8898, "rd": 1765}, {"id": 53, "n": "Koriko", "s": null, "r": null, "pf": null, "rd": 0}, {"id": 48, "n": "Kozak", "s": -0.13539999723434448, "r": 0.6452, "pf": 0.7227, "rd": 214}, {"id": 13, "n": "KYKY_EPTA", "s": 0.03999999910593033, "r": 1.0826, "pf": 0.904, "rd": 414}, {"id": 30, "n": "mazkovadim", "s": -0.19850000739097595, "r": 0.4879, "pf": 0.6625, "rd": 478}, {"id": 21, "n": "miron don", "s": 0.011500000022351742, "r": 1.0115, "pf": 1.3944, "rd": 731}, {"id": 16, "n": "OPER", "s": -0.06790000200271606, "r": 0.8135, "pf": 0.7833, "rd": 1327}, {"id": 18, "n": "painkiller", "s": 0.11020000278949738, "r": 1.2576, "pf": 0.7868, "rd": 1723}, {"id": 27, "n": "SAINT5000", "s": 0.19840000569820404, "r": 1.4777, "pf": 1.5855, "rd": 1024}, {"id": 45, "n": "SiniyTraktobr", "s": 0.019899999722838402, "r": 1.0324, "pf": 0.8702, "rd": 389}, {"id": 1, "n": "st1nker", "s": 0.14249999821186066, "r": 1.3382, "pf": 1.2697, "rd": 303}, {"id": 5, "n": "Tomirlan", "s": -0.1574999988079071, "r": 0.59, "pf": 0.8615, "rd": 1480}, {"id": 55, "n": "V Kolosei", "s": -0.02630000002682209, "r": 0.9173, "pf": 0.9839, "rd": 164}, {"id": 29, "n": "vinik", "s": 0.19189999997615814, "r": 1.4614, "pf": 1.63, "rd": 154}, {"id": 58, "n": "Бархатные тяги", "s": -0.14949999749660492, "r": 0.61, "pf": 0.5746, "rd": 315}], "def": {"day": "10.11", "A": [27, 3, 7, 18, 5], "B": [23, 21, 11, 6, 16]}, "md": 0.35, "k": 0.7, "calib": 200, "sig": 0.23136802699240064, "built": "20.11.2026 13:54"};
-const P={};D.players.forEach(x=>{x.s=x.s??0;x.pf=x.pf??1;P[x.id]=x;});
-let T={};
+const D={"players": [{"id": 57, "n": "amirovart", "s": -0.09030000120401382, "r": 0.7576, "pf": 0.8559, "rd": 619, "mp": {"Anubis": 0.01368, "Cache": 0.00753, "Ancient": -0.01326, "Mirage": 0.00313, "Dust II": -0.00405, "Inferno": -0.00197}}, {"id": 47, "n": "asdUF", "s": 0.2475000023841858, "r": 1.6002, "pf": 1.768, "rd": 136, "mp": {"Cache": -0.03399, "Inferno": 0.01227, "Dust II": -0.01337, "Mirage": 0.03485}}, {"id": 6, "n": "Ded Pool", "s": 0.03799999877810478, "r": 1.0776, "pf": 0.9156, "rd": 1736, "mp": {"Mirage": 0.01715, "Ancient": -0.01887, "Nuke": 0.00472, "Dust II": -0.01006, "Inferno": 0.03041, "Anubis": -0.02118, "Cache": -0.0115}}, {"id": 23, "n": "dim0ak", "s": 0.15710000693798065, "r": 1.3745, "pf": 1.4138, "rd": 752, "mp": {"Ancient": 0.0522, "Inferno": -0.01307, "Mirage": -0.02291, "Dust II": 0.00243, "Cache": -0.01853, "Anubis": -0.00694, "Nuke": 0.04228}}, {"id": 44, "n": "fankyo", "s": 0.07609999924898148, "r": 1.1727, "pf": 1.2079, "rd": 50, "mp": {"Dust II": -0.01182, "Mirage": 0.01428}}, {"id": 12, "n": "Fravanat", "s": -0.03220000118017197, "r": 0.9026, "pf": 0.9576, "rd": 625, "mp": {"Mirage": -0.00297, "Cache": 0.03518, "Dust II": -0.00718, "Anubis": -0.00798, "Inferno": -0.02032, "Nuke": 0.00234}}, {"id": 52, "n": "GHOST", "s": -0.12919999659061432, "r": 0.6606, "pf": 0.7574, "rd": 266, "mp": {"Dust II": 0.01635, "Cache": -0.0012, "Ancient": -0.01383, "Anubis": -0.01373, "Inferno": -0.0065, "Nuke": 0.02031}}, {"id": 40, "n": "Igor_44", "s": 0.036400001496076584, "r": 1.0735, "pf": 0.9165, "rd": 692, "mp": {"Inferno": 0.02992, "Ancient": -0.0354, "Mirage": -0.0022, "Cache": 0.01086}}, {"id": 3, "n": "karab13v", "s": 0.030799999833106995, "r": 1.0596, "pf": 1.034, "rd": 1721, "mp": {"Cache": -0.00163, "Inferno": 0.01895, "Nuke": 0.01982, "Ancient": 0.00605, "Mirage": -0.02622, "Anubis": 0.03849, "Dust II": 0.00434}}, {"id": 28, "n": "Knifeofmeat", "s": 0.05790000036358833, "r": 1.1271, "pf": 1.4186, "rd": 326, "mp": {"Cache": -0.00111, "Ancient": 0.00836, "Mirage": 0.01099, "Nuke": -0.00742, "Dust II": -0.02658, "Inferno": 0.01805, "Anubis": -0.00356}}, {"id": 7, "n": "kolosei", "s": -0.050999999046325684, "r": 0.8556, "pf": 1.0641, "rd": 1126, "mp": {"Anubis": -0.00215, "Mirage": -0.00568, "Ancient": 0.01688, "Nuke": 0.02812, "Cache": 0.00484, "Inferno": 0.00566, "Dust II": -0.01447}}, {"id": 11, "n": "KoMAR1k", "s": -0.013100000098347664, "r": 0.9503, "pf": 0.8898, "rd": 1765, "mp": {"Nuke": -0.03269, "Dust II": -0.015, "Ancient": -0.00168, "Anubis": 0.0409, "Inferno": -0.00153, "Cache": 0.00722, "Mirage": 0.00701}}, {"id": 53, "n": "Koriko", "s": null, "r": null, "pf": null, "rd": 0, "mp": {}}, {"id": 48, "n": "Kozak", "s": -0.13539999723434448, "r": 0.6452, "pf": 0.7227, "rd": 214, "mp": {"Ancient": -0.01185, "Inferno": 0.02703, "Mirage": -0.02714, "Dust II": 0.01916}}, {"id": 13, "n": "KYKY_EPTA", "s": 0.03999999910593033, "r": 1.0826, "pf": 0.904, "rd": 414, "mp": {"Dust II": 0.0034, "Cache": 0.01895, "Inferno": -0.0159, "Mirage": 0.00452, "Nuke": 0.00225, "Anubis": -0.01563, "Ancient": -0.00488}}, {"id": 30, "n": "mazkovadim", "s": -0.19850000739097595, "r": 0.4879, "pf": 0.6625, "rd": 478, "mp": {"Inferno": 0.02692, "Dust II": 0.01171, "Nuke": -0.01002, "Ancient": -0.03783, "Anubis": 0.00727, "Mirage": 0.00241}}, {"id": 21, "n": "miron don", "s": 0.011500000022351742, "r": 1.0115, "pf": 1.3944, "rd": 731, "mp": {"Anubis": -0.01026, "Mirage": 0.00106, "Inferno": -0.00187, "Cache": -0.00221, "Ancient": 0.00334, "Dust II": 0.00127}}, {"id": 16, "n": "OPER", "s": -0.06790000200271606, "r": 0.8135, "pf": 0.7833, "rd": 1327, "mp": {"Anubis": -0.02304, "Inferno": 0.02403, "Cache": -0.01607, "Ancient": 0.00271, "Mirage": 0.00168, "Dust II": -0.00499}}, {"id": 18, "n": "painkiller", "s": 0.11020000278949738, "r": 1.2576, "pf": 0.7868, "rd": 1723, "mp": {"Ancient": 0.00466, "Nuke": 0.01754, "Dust II": -0.00185, "Cache": -0.01348, "Inferno": 0.02736, "Mirage": -0.00869}}, {"id": 27, "n": "SAINT5000", "s": 0.19840000569820404, "r": 1.4777, "pf": 1.5855, "rd": 1024, "mp": {"Anubis": -0.05276, "Ancient": 0.01519, "Mirage": 0.00195, "Dust II": -0.00535, "Nuke": -0.01228, "Inferno": 0.01182, "Cache": 0.02613}}, {"id": 45, "n": "SiniyTraktobr", "s": 0.019899999722838402, "r": 1.0324, "pf": 0.8702, "rd": 389, "mp": {"Ancient": 0.01103, "Mirage": 0.01071, "Inferno": -0.02252, "Dust II": 0.01469, "Cache": -0.02236}}, {"id": 1, "n": "st1nker", "s": 0.14249999821186066, "r": 1.3382, "pf": 1.2697, "rd": 303, "mp": {"Mirage": -0.00564, "Inferno": 0.01299, "Cache": -0.02526, "Dust II": -0.03285, "Ancient": 0.05987}}, {"id": 5, "n": "Tomirlan", "s": -0.1574999988079071, "r": 0.59, "pf": 0.8615, "rd": 1480, "mp": {"Anubis": -0.00226, "Inferno": -0.00588, "Dust II": -0.00701, "Cache": -0.00958, "Mirage": -0.0028, "Ancient": 0.03062}}, {"id": 55, "n": "V Kolosei", "s": -0.02630000002682209, "r": 0.9173, "pf": 0.9839, "rd": 164, "mp": {"Anubis": 0.01405, "Dust II": 0.01182, "Ancient": -0.00679, "Nuke": -0.02026}}, {"id": 29, "n": "vinik", "s": 0.19189999997615814, "r": 1.4614, "pf": 1.63, "rd": 154, "mp": {"Anubis": -0.01061, "Mirage": -0.00155, "Dust II": 0.02695, "Inferno": 0.0074, "Ancient": -0.00924, "Nuke": -0.01435}}, {"id": 58, "n": "Бархатные тяги", "s": -0.14949999749660492, "r": 0.61, "pf": 0.5746, "rd": 315, "mp": {"Inferno": -0.00798, "Nuke": -0.00785, "Mirage": -0.00798, "Dust II": -0.00881, "Anubis": -0.00814, "Ancient": 0.03015}}], "pool": ["Mirage", "Dust II", "Ancient", "Inferno", "Cache", "Anubis", "Nuke", "Overpass", "Train", "Vertigo"], "def": {"day": "10.11", "A": [27, 3, 7, 18, 5], "B": [23, 21, 11, 6, 16], "n": 4, "maps": []}, "md": 0.35, "k": 0.7, "calib": 200, "sig": 0.23136802699240064, "built": "20.11.2026 14:26"};
+const P={};D.players.forEach(x=>{x.s=x.s??0;x.pf=x.pf??1;x.mp=x.mp||{};P[x.id]=x;});
+let T={}, MAPS=[];
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function comb(n,k){let r=1;for(let i=1;i<=k;i++)r=r*(n-k+i)/i;return r;}
 function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
 const team=t=>Object.keys(T).filter(id=>T[id]===t).map(Number);
-const coef=pr=>{const k=1/pr;return k>=999?'999+':k>=100?String(Math.round(k)):k.toFixed(2);};
+const coef=pr=>{const k=1/Math.max(pr,1e-9);return k>=999?'999+':k>=100?String(Math.round(k)):k.toFixed(2);};
 const pct=pr=>pr>=0.995?'>99%':pr<0.01?(pr*100).toFixed(1)+'%':Math.round(pr*100)+'%';
 const row=(l,pr)=>pr<0.002?'':`<tr><td class="l">${l}</td><td class="r mono muted">${pct(pr)}</td><td class="r mono"><b>${coef(pr)}</b></td></tr>`;
 const mcard=(title,body)=>`<div class="mk-card bento"><h3>${title}</h3>${body}</div>`;
 const tbl=rows=>`<table class="mk-tbl">${rows.join('')}</table>`;
+
+function mapProbs(A,B,mapName){
+  const sOf=id=>P[id].s+(mapName?(P[id].mp[mapName]||0):0);
+  const sum=ids=>ids.reduce((a,id)=>a+sOf(id),0);
+  const z=(sum(A)-sum(B)+D.md*(A.length-B.length))*D.k;
+  const p=1/(1+Math.exp(-z)),q=1-p,S=[];
+  for(let k=0;k<=11;k++){const c=comb(12+k,k);S.push({a:13,b:k,pr:c*p**13*q**k,ot:0},{a:k,b:13,pr:c*q**13*p**k,ot:0});}
+  const pOT=comb(24,12)*p**12*q**12;let tie=pOT,base=12,ot=1;
+  while(tie>1e-12&&ot<=40){
+    for(let k=0;k<=2;k++){const c=comb(3+k,k);S.push({a:base+4,b:base+k,pr:tie*c*p**4*q**k,ot},{a:base+k,b:base+4,pr:tie*c*q**4*p**k,ot});}
+    tie*=20*p**3*q**3;base+=3;ot++;
+  }
+  const pm=S.reduce((a,x)=>a+(x.a>x.b?x.pr:0),0);
+  return {p,q,pm,pOT,S};
+}
+
+// Точная свёртка Пуассона–Бинома для серии из карт с РАЗНЫМИ вероятностями [pm_1, pm_2, ..., pm_n]
+function seriesDist(pms){
+  let dp=[1.0];
+  for(const pm of pms){
+    const next=new Array(dp.length+1).fill(0);
+    for(let wins=0;wins<dp.length;wins++){
+      next[wins]+=dp[wins]*(1-pm);
+      next[wins+1]+=dp[wins]*pm;
+    }
+    dp=next;
+  }
+  return dp; // dp[a] = вероятность, что команда A выиграет ровно `a` карт из pms.length
+}
+
+function renderMapChips(A,B){
+  const hasTeams=A.length>0&&B.length>0;
+  $('mapChips').innerHTML=D.pool.map(mn=>{
+    const idx=MAPS.indexOf(mn);
+    const badge=idx>=0?`<span class="ord">${idx+1}</span>`:'';
+    let sub='';
+    if(hasTeams){
+      const mp=mapProbs(A,B,mn).pm;
+      sub=`<span class="mpct mono">${Math.round(mp*100)}:${Math.round((1-mp)*100)}</span>`;
+    }
+    return `<button type="button" class="m-pick ${idx>=0?'sel':''}" data-map="${esc(mn)}">${badge}<span>${esc(mn)}</span>${sub}</button>`;
+  }).join('');
+}
 
 function pair(title,l1,l2,lines){
   const r=lines.filter(([,x])=>x>=0.03&&x<=0.97)
@@ -95,46 +173,68 @@ function pair(title,l1,l2,lines){
 
 function calc(A,B,n){
   if(!A.length||!B.length){
-    $('out').innerHTML='<p class="sub" style="margin-top:16px">Отметьте игроков кнопками A и B выше для расчёта шансов.</p>';
+    $('out').innerHTML='<p class="sub" style="margin-top:16px">Отметьте игроков кнопками A и B для расчёта шансов по картам и серии.</p>';
     return;
   }
-  const sum=ids=>ids.reduce((a,id)=>a+P[id].s,0);
-  const z=(sum(A)-sum(B)+D.md*(A.length-B.length))*D.k;
-  const p=1/(1+Math.exp(-z)),q=1-p,S=[];
-  for(let k=0;k<=11;k++){const c=comb(12+k,k);S.push({a:13,b:k,pr:c*p**13*q**k,ot:0},{a:k,b:13,pr:c*q**13*p**k,ot:0});}
-  const pOT=comb(24,12)*p**12*q**12;let tie=pOT,base=12,ot=1;
-  while(tie>1e-12&&ot<=40){
-    for(let k=0;k<=2;k++){const c=comb(3+k,k);S.push({a:base+4,b:base+k,pr:tie*c*p**4*q**k,ot},{a:base+k,b:base+4,pr:tie*c*q**4*p**k,ot});}
-    tie*=20*p**3*q**3;base+=3;ot++;
-  }
-  const Pr=f=>S.reduce((a,x)=>a+(f(x)?x.pr:0),0);
-  const pm=Pr(x=>x.a>x.b);
+  const base=mapProbs(A,B,null);
   const avgR=ids=>{const v=ids.map(id=>P[id].r).filter(x=>x!=null);return v.length?(v.reduce((a,b)=>a+b,0)/v.length).toFixed(2):'—';};
 
+  // Формируем список из N карт серии (выбранные по порядку + нейтральные слоты, если выбрано меньше N)
+  const slots=[];
+  for(let i=0;i<n;i++){
+    const mn=MAPS[i]||null;
+    slots.push({no:i+1,name:mn,st:mn?mapProbs(A,B,mn):base});
+  }
+
   let h=`<div class="matchup bento">
-    <div class="mu-side"><span class="tm-title tmA">КОМАНДА A</span><b class="mu-odd mono">${coef(pm)}</b><span class="sub mono">${pct(pm)} победа · сила ${avgR(A)}</span></div>
-    <div style="text-align:center"><span class="eyebrow mono">ВЕРОЯТНОСТЬ КАРТЫ</span><div class="mono" style="color:var(--sub);font-size:12px">раунд ${(p*100).toFixed(1)}% / ${(q*100).toFixed(1)}%</div><div class="mu-bar"><i style="width:${(pm*100).toFixed(1)}%"></i></div></div>
-    <div class="mu-side right"><span class="tm-title tmB">КОМАНДА B</span><b class="mu-odd mono">${coef(1-pm)}</b><span class="sub mono">${pct(1-pm)} победа · сила ${avgR(B)}</span></div>
+    <div class="mu-side"><span class="tm-title tmA">КОМАНДА A (БАЗА)</span><b class="mu-odd mono">${coef(base.pm)}</b><span class="sub mono">${pct(base.pm)} · ср. рейтинг ${avgR(A)}</span></div>
+    <div style="text-align:center"><span class="eyebrow mono">БАЗОВЫЙ БАЛАНС БЕЗ КАРТЫ</span><div class="mono" style="color:var(--sub);font-size:12px">раунд ${(base.p*100).toFixed(1)}% / ${(base.q*100).toFixed(1)}%</div><div class="mu-bar"><i style="width:${(base.pm*100).toFixed(1)}%"></i></div></div>
+    <div class="mu-side right"><span class="tm-title tmB">КОМАНДА B (БАЗА)</span><b class="mu-odd mono">${coef(1-base.pm)}</b><span class="sub mono">${pct(1-base.pm)} · ср. рейтинг ${avgR(B)}</span></div>
   </div>`;
 
+  // По-карточные плашки с индивидуальными коэффициентами
+  h+=`<div class="map-odds-grid">`+slots.map(sl=>{
+    const pm=sl.st.pm;
+    const lbl=sl.name?esc(sl.name):'Карта не выбрана (база)';
+    return `<div class="mo-card bento">
+      <div class="mo-top"><span class="mo-num mono">КАРТА #${sl.no}</span><span class="mono muted" style="font-size:11px">OT ${pct(sl.st.pOT)}</span></div>
+      <div class="mo-name">${lbl}</div>
+      <div class="mo-duel">
+        <div class="mo-side"><span class="tmA" style="font-size:11px;font-weight:700">A · ${pct(pm)}</span><b class="mono">${coef(pm)}</b></div>
+        <div class="mo-side" style="text-align:right"><span class="tmB" style="font-size:11px;font-weight:700">${pct(1-pm)} · B</span><b class="mono">${coef(1-pm)}</b></div>
+      </div>
+    </div>`;
+  }).join('')+`</div>`;
+
+  const pms=slots.map(s=>s.st.pm);
+  const dp=seriesDist(pms);
   const topCards=[];
   if(n>1){
     const r=[];let wA=0,dr=0,wB=0;
     for(let a=n;a>=0;a--){
-      const pr=comb(n,a)*pm**a*(1-pm)**(n-a);
-      r.push(row(`Счёт ${a}:${n-a}`,pr));
-      if(a>n-a)wA+=pr;else if(a===n-a)dr+=pr;else wB+=pr;
+      const b=n-a,pr=dp[a];
+      r.push(row(`Точный счёт ${a}:${b}`,pr));
+      if(a>b)wA+=pr;else if(a===b)dr+=pr;else wB+=pr;
     }
     const ev=[row('Победа A в серии',wA)];
     if(n%2===0)ev.push(row('Ничья по картам',dr));
     ev.push(row('Победа B в серии',wB));
-    topCards.push(mcard(`Итог вечера (${n} карт)`,tbl(ev.concat(r))));
+    const subTag=MAPS.length?`с учётом карт`:`базовая`;
+    topCards.push(mcard(`Итог вечера (${n} карт · ${subTag})`,tbl(ev.concat(r))));
   }
 
-  const otRows=[row('Овертайм 12:12 на карте — Да',pOT),row('Овертайм на карте — Нет',1-pOT)];
-  if(n>1)otRows.push(row(`Хотя бы 1 ОТ за ${n} карт`,1-(1-pOT)**n));
-  otRows.push(row('Пистолеты: A берёт оба',p*p),row('Пистолеты: размен 1:1',2*p*q),row('Пистолеты: B берёт оба',q*q));
-  topCards.push(mcard('Специальные рынки',tbl(otRows)));
+  const pNoOtAll=slots.reduce((acc,s)=>acc*(1-s.st.pOT),1);
+  const pAnyOt=1-pNoOtAll;
+  const s1=slots[0].st;
+  const otRows=[
+    row(`Хотя бы 1 ОТ (12:12) за вечер — Да`,pAnyOt),
+    row(`Овертаймов сегодня не будет — Нет`,pNoOtAll),
+    row(`ОТ на Карте #1 (${slots[0].name||'база'})`,s1.pOT),
+    row('Пистолеты К1: A оба',s1.p*s1.p),
+    row('Пистолеты К1: размен 1:1',2*s1.p*s1.q),
+    row('Пистолеты К1: B оба',s1.q*s1.q),
+  ];
+  topCards.push(mcard('Овертаймы и спецрынки',tbl(otRows)));
 
   const ids=[...A,...B],N=20000,cnt={},R=rng(67);ids.forEach(i=>cnt[i]=0);
   for(let t=0;t<N;t++){
@@ -145,6 +245,7 @@ function calc(A,B,n){
   topCards.push(mcard('Фавориты на MVP вечера',tbl(ids.sort((x,y)=>cnt[y]-cnt[x]).slice(0,8)
     .map(i=>row(`<span class="${T[i]==='A'?'tmA':'tmB'}">●</span> ${esc(P[i].n)}`,cnt[i]/N)))));
 
+  const S=s1.S,Pr=f=>S.reduce((a,x)=>a+(f(x)?x.pr:0),0);
   const exact=w=>{
     const r=[],me=s=>w==='A'?s.a:s.b,op=s=>w==='A'?s.b:s.a,lab=(x,y)=>w==='A'?`${x}:${y}`:`${y}:${x}`;
     for(let k=5;k<=11;k++)r.push(row(lab(13,k),S.find(s=>s.ot===0&&me(s)===13&&op(s)===k).pr));
@@ -155,11 +256,12 @@ function calc(A,B,n){
     .concat([2.5,3.5,4.5,5.5].map(x=>[`A +${x} / B −${x}`,Pr(s=>s.a-s.b>-x)]));
   const TT=[19.5,20.5,21.5,22.5].map(t=>[`Тотал ${t}`,Pr(s=>s.a+s.b>t)]);
 
-  const extra=`<details class="fold bento"><summary>Развернуть детальную роспись (форы, тоталы раундов и точный счёт карты)</summary>
+  const m1Title=slots[0].name?`Карта #1 (${esc(slots[0].name)})`:`Карта #1`;
+  const extra=`<details class="fold bento"><summary>Детальная роспись на ${m1Title} (форы, тоталы и точный счёт раундов)</summary>
     <div class="mk-grid">
       ${pair('Фора по раундам','Ф1','Ф2',H)}
-      ${pair('Тотал раундов на карте','ТБ','ТМ',TT)}
-      ${mcard('Ходовые точные счета (A)',exact('A'))}
+      ${pair('Тотал раундов','ТБ','ТМ',TT)}
+      ${mcard('Точные счета (победа A)',exact('A'))}
     </div></details>`;
 
   $('out').innerHTML=h+`<div class="mk-grid">${topCards.join('')}</div>`+extra;
@@ -171,27 +273,48 @@ function renderPool(){
    <button class="ab ${T[x.id]==='A'?'onA':''}" data-id="${x.id}" data-t="A">A</button>
    <button class="ab ${T[x.id]==='B'?'onB':''}" data-id="${x.id}" data-t="B">B</button></div>`).join('');
 }
-function loadDef(){T={};(D.def.A||[]).forEach(id=>{if(P[id])T[id]='A';});(D.def.B||[]).forEach(id=>{if(P[id])T[id]='B';});}
+function loadDef(){
+  T={};(D.def.A||[]).forEach(id=>{if(P[id])T[id]='A';});(D.def.B||[]).forEach(id=>{if(P[id])T[id]='B';});
+  if(D.def.n>=1&&D.def.n<=5)$('nMaps').value=D.def.n;
+  MAPS=(D.def.maps||[]).filter(m=>D.pool.includes(m));
+}
 function fromHash(){
   const h=new URLSearchParams(location.hash.slice(1));if(!h.has('A')&&!h.has('B'))return false;T={};
   ['A','B'].forEach(t=>(h.get(t)||'').split(',').filter(Boolean).forEach(id=>{if(P[id])T[id]=t;}));
-  const n=+h.get('n');if(n>=1&&n<=5)$('nMaps').value=n;return true;
+  const n=+h.get('n');if(n>=1&&n<=5)$('nMaps').value=n;
+  MAPS=(h.get('maps')||'').split(',').map(s=>s.trim()).filter(m=>D.pool.includes(m));
+  return true;
 }
 function update(){
-  renderPool();const A=team('A'),B=team('B'),lst=ids=>ids.map(id=>esc(P[id].n)).join(', ')||'—';
+  const A=team('A'),B=team('B'),n=+$('nMaps').value;
+  if(MAPS.length>n)MAPS=MAPS.slice(0,n);
+  renderPool();renderMapChips(A,B);
+  const lst=ids=>ids.map(id=>esc(P[id].n)).join(', ')||'—';
   $('cA').textContent=`(${A.length})`;$('cB').textContent=`(${B.length})`;$('lA').innerHTML=lst(A);$('lB').innerHTML=lst(B);
-  history.replaceState(null,'',`#A=${A.join(',')}&B=${B.join(',')}&n=${$('nMaps').value}`);
-  calc(A,B,+$('nMaps').value);
+  const mHash=MAPS.length?`&maps=${encodeURIComponent(MAPS.join(','))}`:'';
+  history.replaceState(null,'',`#A=${A.join(',')}&B=${B.join(',')}&n=${n}${mHash}`);
+  calc(A,B,n);
 }
 for(let i=1;i<=5;i++)$('nMaps').add(new Option(i,i,i===4,i===4));
 $('built').textContent=D.built;$('sig').textContent=D.sig.toFixed(2);
 $('pool').onclick=e=>{const b=e.target.closest('button');if(!b)return;const id=b.dataset.id,t=b.dataset.t;
   if(T[id]===t)delete T[id];else T[id]=t;update();};
+$('mapChips').onclick=e=>{
+  const b=e.target.closest('button[data-map]');if(!b)return;
+  const mn=b.dataset.map,idx=MAPS.indexOf(mn),n=+$('nMaps').value;
+  if(idx>=0)MAPS.splice(idx,1);
+  else if(MAPS.length<n)MAPS.push(mn);
+  else{MAPS.shift();MAPS.push(mn);}
+  update();
+};
 $('bDef').onclick=()=>{loadDef();update();};
 $('bSwap').onclick=()=>{for(const id in T)T[id]=T[id]==='A'?'B':'A';update();};
-$('bClr').onclick=()=>{T={};update();};
+$('bClr').onclick=()=>{T={};MAPS=[];update();};
+$('bClrMaps').onclick=()=>{MAPS=[];update();};
 $('nMaps').onchange=update;
 $('bLink').onclick=()=>navigator.clipboard.writeText(location.href).then(()=>{$('msg').textContent='Ссылка скопирована';setTimeout(()=>$('msg').textContent='',2000);});
 if(D.def.A)$('bDef').textContent='Составы бота ('+D.def.day+')';else $('bDef').style.display='none';
-if(!fromHash())loadDef();update();
+if(!fromHash())loadDef();
+if(team('A').length===5&&team('B').length===5)$('poolFold').removeAttribute('open');
+update();
 </script></body></html>
