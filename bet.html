@@ -1,48 +1,57 @@
 <!doctype html><html lang="ru"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b0c0e">
-<title>Линия и баланс составов — EVENT CS BREST</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#090a0d">
+<title>Линия и конструктор составов — EVENT CS BREST</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=1795172047">
 <style>
 .toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
-.btn{background:var(--s2);border:1px solid var(--line);color:var(--text);border-radius:5px;padding:6px 12px;font:600 12.5px Inter,sans-serif;cursor:pointer;transition:border-color .12s}
-.btn:hover{border-color:var(--acc)}
+.btn{background:var(--s1);border:1px solid var(--line);color:var(--text);border-radius:7px;padding:6px 13px;font:600 12.5px Inter,sans-serif;cursor:pointer;transition:all .14s}
+.btn:hover{border-color:var(--acc);color:var(--acc)}
 select.btn{padding:5px 10px}
-.lineup-bar{display:grid;grid-template-columns:1fr 1fr;gap:12px;background:var(--s1);border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin-bottom:14px}
+.lineup-bar{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:15px 18px;margin-bottom:14px}
 @media(max-width:700px){.lineup-bar{grid-template-columns:1fr}}
-.tm-title{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
-.tmA{color:#5da2ff}.tmB{color:#ee6b78}
-.tm-list{font-size:13px;color:var(--text);min-height:20px}
-.pool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:6px;background:var(--s1);border:1px solid var(--line);border-radius:6px;padding:12px}
-.p-item{display:flex;align-items:center;gap:6px;background:var(--s2);border:1px solid var(--line);border-radius:4px;padding:5px 8px}
-.p-item .n{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500;font-size:13px}
+.tm-title{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.tmA{color:#60a5fa}.tmB{color:#fb7185}
+.tm-list{font-size:13.5px;font-weight:500;color:var(--text);min-height:20px}
+.pool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:7px;padding:14px}
+.p-item{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:6px;padding:6px 9px;transition:border-color .12s}
+.p-item:hover{border-color:var(--line-hi)}
+.p-item .n{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;font-size:12.5px}
 .p-item .r{color:var(--mute);font-size:11.5px}
-.ab{border:1px solid var(--line-hi);background:var(--s1);color:var(--sub);border-radius:3px;padding:2px 8px;cursor:pointer;font:700 11px "JetBrains Mono",monospace}
-.ab.onA{background:#245bb8;border-color:#3a78e0;color:#fff}
-.ab.onB{background:#b53340;border-color:#de4d5b;color:#fff}
-.matchup{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;background:var(--s1);border:1px solid var(--line);border-top:2px solid var(--acc);border-radius:6px;padding:20px 24px;margin:18px 0}
+.ab{border:1px solid var(--line-hi);background:var(--s1);color:var(--sub);border-radius:4px;padding:2px 8px;cursor:pointer;font:700 11px "JetBrains Mono",monospace;transition:all .12s}
+.ab.onA{background:#2563eb;border-color:#3b82f6;color:#fff}
+.ab.onB{background:#e11d48;border-color:#f43f5e;color:#fff}
+.matchup{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;padding:22px 26px;margin:18px 0;border-color:rgba(240,180,41,.35)}
 @media(max-width:640px){.matchup{grid-template-columns:1fr;text-align:center}}
 .mu-side.right{text-align:right}@media(max-width:640px){.mu-side.right{text-align:center}}
-.mu-odd{font-size:34px;font-weight:700;line-height:1.05;display:block;margin:4px 0}
-.mu-vs{font-size:11px;color:var(--mute);letter-spacing:.08em;text-transform:uppercase;text-align:center}
+.mu-odd{font-size:36px;font-weight:700;line-height:1.05;display:block;margin:4px 0}
+.mu-bar{height:6px;background:rgba(244,63,94,.45);border-radius:3px;overflow:hidden;width:180px;margin:8px auto 0}
+.mu-bar i{display:block;height:100%;background:#3b82f6}
 .mk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:960px){.mk-grid{grid-template-columns:1fr}}
-.mk-card{background:var(--s1);border:1px solid var(--line);border-radius:6px;padding:14px}
-.mk-card h3{margin:0 0 10px;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--sub)}
-.mk-tbl td,.mk-tbl th{padding:6px 6px;font-size:12.5px}
+.mk-card{padding:15px 16px}
+.mk-card h3{margin:0 0 10px;font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--sub)}
+.mk-tbl td,.mk-tbl th{padding:6.5px 6px;font-size:12.5px}
+details.fold{margin:18px 0;padding:12px 16px}
+details.fold summary{cursor:pointer;font-weight:600;font-size:12.5px;color:var(--sub);user-select:none}
+details.fold summary:hover{color:var(--acc)}
+details.fold[open] summary{margin-bottom:14px;color:var(--acc)}
 </style></head><body>
+<div class="ambient"></div>
 <header class="topbar"><div class="topbar-in">
-  <a class="brand" href="index.html"><span class="brand-mark"></span>EVENT CS BREST</a>
-  <nav>
+  <a class="brand" href="index.html"><span class="brand-dot"></span>EVENT CS BREST</a>
+  <nav class="nav-pill">
     <a href="index.html">Рейтинг</a><a href="sessions.html">Матчи</a>
     <a href="maps.html">Карты</a><a href="pairs.html">Связки</a><a href="bet.html" class="on">Линия</a>
   </nav>
+  <div class="top-meta mono">67X-BET ENGINE</div>
 </div></header>
 <main>
   <div class="page-head">
-    <h1>Калькулятор составов и честная линия (67X-Bet)</h1>
-    <p class="sub">Расчёт баланса команд и вероятностей MR12 без букмекерской маржи · обновлено <span id="built" class="mono"></span></p>
+    <div class="eyebrow mono">LINEUP SIMULATOR & FAIR ODDS</div>
+    <h1>Конструктор составов и линия</h1>
+    <p class="sub">Точная вероятностная модель MR12 без букмекерской маржи · обновлено <span id="built" class="mono"></span></p>
   </div>
 
   <div class="toolbar">
@@ -50,21 +59,21 @@ select.btn{padding:5px 10px}
     <button class="btn" id="bSwap">Поменять A ⇄ B</button>
     <button class="btn" id="bClr">Сбросить</button>
     <label class="sub" style="margin:0 0 0 6px">Карт в серии: <select class="btn mono" id="nMaps"></select></label>
-    <button class="btn" id="bLink">Скопировать ссылку на расклад</button>
+    <button class="btn" id="bLink">Скопировать ссылку</button>
     <span id="msg" class="sub" style="color:var(--acc);margin:0"></span>
   </div>
 
-  <div class="lineup-bar">
+  <div class="lineup-bar bento">
     <div><div class="tm-title tmA">Команда A <span id="cA" class="mono"></span></div><div id="lA" class="tm-list"></div></div>
     <div><div class="tm-title tmB">Команда B <span id="cB" class="mono"></span></div><div id="lB" class="tm-list"></div></div>
   </div>
 
-  <div class="pool-grid" id="pool"></div>
+  <div class="pool-grid bento" id="pool"></div>
   <div id="out"></div>
 </main>
-<footer><div class="foot-in"><span>EVENT CS BREST · Модель MR12 + OT MR3 (разброс формы ±<span id="sig" class="mono"></span>)</span><span class="mono">Честные коэффициенты 1/P</span></div></footer>
+<footer><div class="foot-in"><span>EVENT CS BREST · Модель MR12 + OT MR3 (разброс ±<span id="sig" class="mono"></span>)</span><span class="mono">Fair 1/P Odds</span></div></footer>
 <script>
-const D={"players": [{"id": 57, "n": "amirovart", "s": -0.09030000120401382, "r": 0.7576, "pf": 0.8559, "rd": 619}, {"id": 47, "n": "asdUF", "s": 0.2475000023841858, "r": 1.6002, "pf": 1.768, "rd": 136}, {"id": 6, "n": "Ded Pool", "s": 0.03799999877810478, "r": 1.0776, "pf": 0.9156, "rd": 1736}, {"id": 23, "n": "dim0ak", "s": 0.15710000693798065, "r": 1.3745, "pf": 1.4138, "rd": 752}, {"id": 44, "n": "fankyo", "s": 0.07609999924898148, "r": 1.1727, "pf": 1.2079, "rd": 50}, {"id": 12, "n": "Fravanat", "s": -0.03220000118017197, "r": 0.9026, "pf": 0.9576, "rd": 625}, {"id": 52, "n": "GHOST", "s": -0.12919999659061432, "r": 0.6606, "pf": 0.7574, "rd": 266}, {"id": 40, "n": "Igor_44", "s": 0.036400001496076584, "r": 1.0735, "pf": 0.9165, "rd": 692}, {"id": 3, "n": "karab13v", "s": 0.030799999833106995, "r": 1.0596, "pf": 1.034, "rd": 1721}, {"id": 28, "n": "Knifeofmeat", "s": 0.05790000036358833, "r": 1.1271, "pf": 1.4186, "rd": 326}, {"id": 7, "n": "kolosei", "s": -0.050999999046325684, "r": 0.8556, "pf": 1.0641, "rd": 1126}, {"id": 11, "n": "KoMAR1k", "s": -0.013100000098347664, "r": 0.9503, "pf": 0.8898, "rd": 1765}, {"id": 53, "n": "Koriko", "s": null, "r": null, "pf": null, "rd": 0}, {"id": 48, "n": "Kozak", "s": -0.13539999723434448, "r": 0.6452, "pf": 0.7227, "rd": 214}, {"id": 13, "n": "KYKY_EPTA", "s": 0.03999999910593033, "r": 1.0826, "pf": 0.904, "rd": 414}, {"id": 30, "n": "mazkovadim", "s": -0.19850000739097595, "r": 0.4879, "pf": 0.6625, "rd": 478}, {"id": 21, "n": "miron don", "s": 0.011500000022351742, "r": 1.0115, "pf": 1.3944, "rd": 731}, {"id": 16, "n": "OPER", "s": -0.06790000200271606, "r": 0.8135, "pf": 0.7833, "rd": 1327}, {"id": 18, "n": "painkiller", "s": 0.11020000278949738, "r": 1.2576, "pf": 0.7868, "rd": 1723}, {"id": 27, "n": "SAINT5000", "s": 0.19840000569820404, "r": 1.4777, "pf": 1.5855, "rd": 1024}, {"id": 45, "n": "SiniyTraktobr", "s": 0.019899999722838402, "r": 1.0324, "pf": 0.8702, "rd": 389}, {"id": 1, "n": "st1nker", "s": 0.14249999821186066, "r": 1.3382, "pf": 1.2697, "rd": 303}, {"id": 5, "n": "Tomirlan", "s": -0.1574999988079071, "r": 0.59, "pf": 0.8615, "rd": 1480}, {"id": 55, "n": "V Kolosei", "s": -0.02630000002682209, "r": 0.9173, "pf": 0.9839, "rd": 164}, {"id": 29, "n": "vinik", "s": 0.19189999997615814, "r": 1.4614, "pf": 1.63, "rd": 154}, {"id": 58, "n": "Бархатные тяги", "s": -0.14949999749660492, "r": 0.61, "pf": 0.5746, "rd": 315}], "def": {"day": "10.11", "A": [27, 3, 7, 18, 5], "B": [23, 21, 11, 6, 16]}, "md": 0.35, "k": 0.7, "calib": 200, "sig": 0.23136802699240064, "built": "20.11.2026 13:36"};
+const D={"players": [{"id": 57, "n": "amirovart", "s": -0.09030000120401382, "r": 0.7576, "pf": 0.8559, "rd": 619}, {"id": 47, "n": "asdUF", "s": 0.2475000023841858, "r": 1.6002, "pf": 1.768, "rd": 136}, {"id": 6, "n": "Ded Pool", "s": 0.03799999877810478, "r": 1.0776, "pf": 0.9156, "rd": 1736}, {"id": 23, "n": "dim0ak", "s": 0.15710000693798065, "r": 1.3745, "pf": 1.4138, "rd": 752}, {"id": 44, "n": "fankyo", "s": 0.07609999924898148, "r": 1.1727, "pf": 1.2079, "rd": 50}, {"id": 12, "n": "Fravanat", "s": -0.03220000118017197, "r": 0.9026, "pf": 0.9576, "rd": 625}, {"id": 52, "n": "GHOST", "s": -0.12919999659061432, "r": 0.6606, "pf": 0.7574, "rd": 266}, {"id": 40, "n": "Igor_44", "s": 0.036400001496076584, "r": 1.0735, "pf": 0.9165, "rd": 692}, {"id": 3, "n": "karab13v", "s": 0.030799999833106995, "r": 1.0596, "pf": 1.034, "rd": 1721}, {"id": 28, "n": "Knifeofmeat", "s": 0.05790000036358833, "r": 1.1271, "pf": 1.4186, "rd": 326}, {"id": 7, "n": "kolosei", "s": -0.050999999046325684, "r": 0.8556, "pf": 1.0641, "rd": 1126}, {"id": 11, "n": "KoMAR1k", "s": -0.013100000098347664, "r": 0.9503, "pf": 0.8898, "rd": 1765}, {"id": 53, "n": "Koriko", "s": null, "r": null, "pf": null, "rd": 0}, {"id": 48, "n": "Kozak", "s": -0.13539999723434448, "r": 0.6452, "pf": 0.7227, "rd": 214}, {"id": 13, "n": "KYKY_EPTA", "s": 0.03999999910593033, "r": 1.0826, "pf": 0.904, "rd": 414}, {"id": 30, "n": "mazkovadim", "s": -0.19850000739097595, "r": 0.4879, "pf": 0.6625, "rd": 478}, {"id": 21, "n": "miron don", "s": 0.011500000022351742, "r": 1.0115, "pf": 1.3944, "rd": 731}, {"id": 16, "n": "OPER", "s": -0.06790000200271606, "r": 0.8135, "pf": 0.7833, "rd": 1327}, {"id": 18, "n": "painkiller", "s": 0.11020000278949738, "r": 1.2576, "pf": 0.7868, "rd": 1723}, {"id": 27, "n": "SAINT5000", "s": 0.19840000569820404, "r": 1.4777, "pf": 1.5855, "rd": 1024}, {"id": 45, "n": "SiniyTraktobr", "s": 0.019899999722838402, "r": 1.0324, "pf": 0.8702, "rd": 389}, {"id": 1, "n": "st1nker", "s": 0.14249999821186066, "r": 1.3382, "pf": 1.2697, "rd": 303}, {"id": 5, "n": "Tomirlan", "s": -0.1574999988079071, "r": 0.59, "pf": 0.8615, "rd": 1480}, {"id": 55, "n": "V Kolosei", "s": -0.02630000002682209, "r": 0.9173, "pf": 0.9839, "rd": 164}, {"id": 29, "n": "vinik", "s": 0.19189999997615814, "r": 1.4614, "pf": 1.63, "rd": 154}, {"id": 58, "n": "Бархатные тяги", "s": -0.14949999749660492, "r": 0.61, "pf": 0.5746, "rd": 315}], "def": {"day": "10.11", "A": [27, 3, 7, 18, 5], "B": [23, 21, 11, 6, 16]}, "md": 0.35, "k": 0.7, "calib": 200, "sig": 0.23136802699240064, "built": "20.11.2026 13:54"};
 const P={};D.players.forEach(x=>{x.s=x.s??0;x.pf=x.pf??1;P[x.id]=x;});
 let T={};
 const $=id=>document.getElementById(id);
@@ -75,7 +84,7 @@ const team=t=>Object.keys(T).filter(id=>T[id]===t).map(Number);
 const coef=pr=>{const k=1/pr;return k>=999?'999+':k>=100?String(Math.round(k)):k.toFixed(2);};
 const pct=pr=>pr>=0.995?'>99%':pr<0.01?(pr*100).toFixed(1)+'%':Math.round(pr*100)+'%';
 const row=(l,pr)=>pr<0.002?'':`<tr><td class="l">${l}</td><td class="r mono muted">${pct(pr)}</td><td class="r mono"><b>${coef(pr)}</b></td></tr>`;
-const mcard=(title,body)=>`<div class="mk-card"><h3>${title}</h3>${body}</div>`;
+const mcard=(title,body)=>`<div class="mk-card bento"><h3>${title}</h3>${body}</div>`;
 const tbl=rows=>`<table class="mk-tbl">${rows.join('')}</table>`;
 
 function pair(title,l1,l2,lines){
@@ -86,7 +95,7 @@ function pair(title,l1,l2,lines){
 
 function calc(A,B,n){
   if(!A.length||!B.length){
-    $('out').innerHTML='<p class="sub" style="margin-top:16px">Отметьте игроков буквами A и B выше, чтобы рассчитать баланс и коэффициенты.</p>';
+    $('out').innerHTML='<p class="sub" style="margin-top:16px">Отметьте игроков кнопками A и B выше для расчёта шансов.</p>';
     return;
   }
   const sum=ids=>ids.reduce((a,id)=>a+P[id].s,0);
@@ -102,9 +111,9 @@ function calc(A,B,n){
   const pm=Pr(x=>x.a>x.b);
   const avgR=ids=>{const v=ids.map(id=>P[id].r).filter(x=>x!=null);return v.length?(v.reduce((a,b)=>a+b,0)/v.length).toFixed(2):'—';};
 
-  let h=`<div class="matchup">
+  let h=`<div class="matchup bento">
     <div class="mu-side"><span class="tm-title tmA">КОМАНДА A</span><b class="mu-odd mono">${coef(pm)}</b><span class="sub mono">${pct(pm)} победа · сила ${avgR(A)}</span></div>
-    <div class="mu-vs">НА ОТДЕЛЬНОЙ КАРТЕ<div class="mono" style="margin-top:4px;color:var(--sub)">раунд ${(p*100).toFixed(1)}% / ${(q*100).toFixed(1)}%</div></div>
+    <div style="text-align:center"><span class="eyebrow mono">ВЕРОЯТНОСТЬ КАРТЫ</span><div class="mono" style="color:var(--sub);font-size:12px">раунд ${(p*100).toFixed(1)}% / ${(q*100).toFixed(1)}%</div><div class="mu-bar"><i style="width:${(pm*100).toFixed(1)}%"></i></div></div>
     <div class="mu-side right"><span class="tm-title tmB">КОМАНДА B</span><b class="mu-odd mono">${coef(1-pm)}</b><span class="sub mono">${pct(1-pm)} победа · сила ${avgR(B)}</span></div>
   </div>`;
 
@@ -122,10 +131,7 @@ function calc(A,B,n){
     topCards.push(mcard(`Итог вечера (${n} карт)`,tbl(ev.concat(r))));
   }
 
-  const otRows=[
-    row('Овертайм 12:12 на карте — Да',pOT),
-    row('Овертайм на карте — Нет',1-pOT),
-  ];
+  const otRows=[row('Овертайм 12:12 на карте — Да',pOT),row('Овертайм на карте — Нет',1-pOT)];
   if(n>1)otRows.push(row(`Хотя бы 1 ОТ за ${n} карт`,1-(1-pOT)**n));
   otRows.push(row('Пистолеты: A берёт оба',p*p),row('Пистолеты: размен 1:1',2*p*q),row('Пистолеты: B берёт оба',q*q));
   topCards.push(mcard('Специальные рынки',tbl(otRows)));
@@ -139,7 +145,6 @@ function calc(A,B,n){
   topCards.push(mcard('Фавориты на MVP вечера',tbl(ids.sort((x,y)=>cnt[y]-cnt[x]).slice(0,8)
     .map(i=>row(`<span class="${T[i]==='A'?'tmA':'tmB'}">●</span> ${esc(P[i].n)}`,cnt[i]/N)))));
 
-  // Расширенная роспись убрана под спойлер
   const exact=w=>{
     const r=[],me=s=>w==='A'?s.a:s.b,op=s=>w==='A'?s.b:s.a,lab=(x,y)=>w==='A'?`${x}:${y}`:`${y}:${x}`;
     for(let k=5;k<=11;k++)r.push(row(lab(13,k),S.find(s=>s.ot===0&&me(s)===13&&op(s)===k).pr));
@@ -150,7 +155,7 @@ function calc(A,B,n){
     .concat([2.5,3.5,4.5,5.5].map(x=>[`A +${x} / B −${x}`,Pr(s=>s.a-s.b>-x)]));
   const TT=[19.5,20.5,21.5,22.5].map(t=>[`Тотал ${t}`,Pr(s=>s.a+s.b>t)]);
 
-  const extra=`<details class="fold"><summary>Развернуть детальную роспись (форы, тоталы раундов и точный счёт карты)</summary>
+  const extra=`<details class="fold bento"><summary>Развернуть детальную роспись (форы, тоталы раундов и точный счёт карты)</summary>
     <div class="mk-grid">
       ${pair('Фора по раундам','Ф1','Ф2',H)}
       ${pair('Тотал раундов на карте','ТБ','ТМ',TT)}
@@ -186,7 +191,7 @@ $('bDef').onclick=()=>{loadDef();update();};
 $('bSwap').onclick=()=>{for(const id in T)T[id]=T[id]==='A'?'B':'A';update();};
 $('bClr').onclick=()=>{T={};update();};
 $('nMaps').onchange=update;
-$('bLink').onclick=()=>navigator.clipboard.writeText(location.href).then(()=>{$('msg').textContent='Скопировано';setTimeout(()=>$('msg').textContent='',2000);});
+$('bLink').onclick=()=>navigator.clipboard.writeText(location.href).then(()=>{$('msg').textContent='Ссылка скопирована';setTimeout(()=>$('msg').textContent='',2000);});
 if(D.def.A)$('bDef').textContent='Составы бота ('+D.def.day+')';else $('bDef').style.display='none';
 if(!fromHash())loadDef();update();
 </script></body></html>
